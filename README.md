@@ -1,10 +1,10 @@
-# Stop Propogation Readme
+# Stop Propagation Readme
 
 ## Objectives
 
-+ Explain what `stopPropogation()` is and why it's used
++ Explain what `stopPropagation()` is and why it's used
 + Explain "bubbling up"
-+ Use stop propogation to prevent event handlers from bubbling up the DOM
++ Use stop propagation to prevent event handlers from bubbling up the DOM
 
 ## Intro
 
@@ -64,9 +64,9 @@ In jQuery, all click events "bubble up" the DOM. The `document` object knows abo
 
 What in the world? Why is that behavior we would want? In most cases you wouldn't at all. Imagine if you had a large series of nested elements all with click events. Firing the click event of the innermost child would trigger the click events of every single parent.
 
-## Stop Propogation
+## Stop Propagation
 
-So how the heck do we stop that from happening? With `stopPropogation`. Let's go ahead and refactor our jQuery:
+So how the heck do we stop that from happening? With `stopPropagation`. Let's go ahead and refactor our jQuery:
 
 ```js
 $('.course').on('click', function(){
@@ -75,13 +75,13 @@ $('.course').on('click', function(){
 
   $('.course .delete').on('click', function(event){
     alert("about to delete");
-    event.stopPropogation();
+    event.stoppropagation();
   })
 ```
 
-You'll notice we didn't change anything to the click event on the class `course`. But we did make some changes to the delete button. We passed `event` to the anonymous function and then called the `stopPropogation` function on the event object. This function stops the click event from bubbling up the dom.
+You'll notice we didn't change anything to the click event on the class `course`. But we did make some changes to the delete button. We passed `event` to the anonymous function and then called the `stoppropagation` function on the event object. This function stops the click event from bubbling up the dom.
 
-Go ahead and comment out all the code in `js/script.js` except the code under the comment `//stop propogation`. Refresh the page in the browser. Click a course name to hide the details and then click the `x`. The alert should appear and the details should remain hidden.
+Go ahead and comment out all the code in `js/script.js` except the code under the comment `//stop propagation`. Refresh the page in the browser. Click a course name to hide the details and then click the `x`. The alert should appear and the details should remain hidden.
 
 ## Resources
 

@@ -9,7 +9,7 @@ $(document).ready(function(){
     alert("about to delete");
   });
 
-  //stop propogation
+  //stop propagation
   // $('.course').on('click', function(){
   //   $(this).find('.detail').slideToggle();
   // });
