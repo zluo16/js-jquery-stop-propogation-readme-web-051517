@@ -75,11 +75,11 @@ $('.course').on('click', function(){
 
   $('.course .delete').on('click', function(event){
     alert("about to delete");
-    event.stoppropagation();
+    event.stopPropagation();
   })
 ```
 
-You'll notice we didn't change anything to the click event on the class `course`. But we did make some changes to the delete button. We passed `event` to the anonymous function and then called the `stoppropagation` function on the event object. This function stops the click event from bubbling up the dom.
+You'll notice we didn't change anything to the click event on the class `course`. But we did make some changes to the delete button. We passed `event` to the anonymous function and then called the `stopPropagation` function on the event object. This function stops the click event from bubbling up the dom.
 
 Go ahead and comment out all the code in `js/script.js` except the code under the comment `//stop propagation`. Refresh the page in the browser. Click a course name to hide the details and then click the `x`. The alert should appear and the details should remain hidden.
 
