@@ -51,3 +51,4 @@ examples of how to use `stopPropogation()`
 + some examples for students to practice with tests and in browser
 
 ## Resources
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-jquery-stop-propogation-readme' title='Stop Propogation Readme'>Stop Propogation Readme</a> on Learn.co and start learning to code for free.</p>
