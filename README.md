@@ -1,54 +1,91 @@
-# Stop Propogation Readme
+# Stop Propagation Readme
 
 ## Objectives
 
-+ Explain what `stopPropogation()` is and why it's used
++ Explain what `stopPropagation()` is and why it's used
 + Explain "bubbling up"
-+ Use stop propogation to prevent event handlers from bubbling up the DOM
++ Use stop propagation to prevent event handlers from bubbling up the DOM
 
 ## Intro
 
+Let's say you're building a course registration site for a Flatiron. You need to build a list of available course, and include some details about each course.
 
-parent has click event and child has click event and you click child and therefore parent click event fires too, all events bubble up to window object
-kill with stopPropogation
+You need to build is so that when you click a course, the details about the course disappear and reappear. Each course would need to have a click event that toggles the details. Flatiron also wants to be able to remove courses if they're not offered that semester, so there will need to be a button that removes that course (an `x`)
 
-deepest node in doc will alert Document when fired but things higher up the chain won't fire lower
+We'd end up with some HTML like this:
 
-## Usage
-HTML:
 ```html
 <ul class="courses">
   <li class="course">
-    Learn Ruby
-      <span class='delete' data-id='1'>x</span>
-    <div class="details">
+    Ruby
+      <span class='delete'>x</span>
+    <div class="detail">
       Learn Ruby, It loves you. Be happy.
+    </div>
+  </li>
+  <li class="course">
+    JavaScript
+      <span class='delete'>x</span>
+    <div class="detail">
+      Learn JavaScript and build powerful full stack web apps
+    </div>
+  </li>
+  <li class="course">
+    iOS
+      <span class='delete'>x</span>
+    <div class="detail">
+      Everyone loves a good iPhone app
     </div>
   </li>
 </ul>
 ```
 
-```
+And let's say we create those click events:
 
-JS:
 ```js
-$('.courses').on('click', '.course', function(){
+$('.course').on('click', function(){
     $(this).find('.details').slideToggle();
   });
 
-  $('.course .delete').on('click', function(e){
-    e.stopPropagation();
+  $('.course .delete').on('click', function(){
     alert("about to delete");
   })
 ```
 
-when click `x`, will alert `"about to delete"` and then see course slide close because child event fires, and bubbles up so parent event fires. `stopPropogation` in child click event stops parent event from firing
+The first click event toggles the details on and off the screen. The second click event just alerts `"about to delete"`.
 
-examples of how to use `stopPropogation()`
+Open `index.html` in the browser and `js/script.js` in the text editor. Make sure all the code in `js/script.js` is commented out expect the code under the comment `// toggle and delete`.
 
-## Instructions
+Go ahead and first click `Ruby` in the browser to hide the details. Then click the `x` to "delete" the item. You should see the alert appear, as we expected. But wait, why do the details toggle on the screen? How did that event happen?
 
-+ some examples for students to practice with tests and in browser
+## Bubbling Up
+
+In jQuery, all click events "bubble up" the DOM. The `document` object knows about every event that is triggered on a page. This means that in our example above, the `span` with the `x` is a child of the `li` with the class `course`. When we click the `x`, that click event bubbles up the DOM and the parent element, the `li` knows a click event has been triggered, and that triggers the click event of the parent. 
+
+What in the world? Why is that behavior we would want? In most cases you wouldn't at all. Imagine if you had a large series of nested elements all with click events. Firing the click event of the innermost child would trigger the click events of every single parent.
+
+## Stop Propagation
+
+So how the heck do we stop that from happening? With `stopPropagation`. Let's go ahead and refactor our jQuery:
+
+```js
+$('.course').on('click', function(){
+    $(this).find('.details').slideToggle();
+  });
+
+  $('.course .delete').on('click', function(event){
+    alert("about to delete");
+    event.stopPropagation();
+  })
+```
+
+You'll notice we didn't change anything to the click event on the class `course`. But we did make some changes to the delete button. We passed `event` to the anonymous function and then called the `stopPropagation` function on the event object. This function stops the click event from bubbling up the dom.
+
+Go ahead and comment out all the code in `js/script.js` except the code under the comment `//stop propagation`. Refresh the page in the browser. Click a course name to hide the details and then click the `x`. The alert should appear and the details should remain hidden.
 
 ## Resources
+
++ [jQuery Docs](https://api.jquery.com/event.stoppropagation/)
++ [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)
+
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-jquery-stop-propogation-readme' title='Stop Propogation Readme'>Stop Propogation Readme</a> on Learn.co and start learning to code for free.</p>
