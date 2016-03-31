@@ -54,7 +54,7 @@ $('.course').on('click', function(){
 
 The first click event toggles the details on and off the screen. The second click event just alerts `"about to delete"`.
 
-Open `index.html` in the browser and `js/script.js` in the text editor. Make sure all the code in `js/script.js` is commented out expect the code under the comment `// toggle and delete`.
+Open `index.html` in the browser and `js/script.js` in the text editor. Make sure all the code in `js/script.js` is commented out except the code under the comment `// toggle and delete`.
 
 Go ahead and first click `Ruby` in the browser to hide the details. Then click the `x` to "delete" the item. You should see the alert appear, as we expected. But wait, why do the details toggle on the screen? How did that event happen?
 
