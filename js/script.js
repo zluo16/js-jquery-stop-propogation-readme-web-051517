@@ -5,18 +5,18 @@ $(document).ready(function(){
     $(this).find('.detail').slideToggle();
   });
 
-  $('.course .delete').on('click', function(){
-    alert("about to delete");
-  });
+  // $('.course .delete').on('click', function(){
+  //   alert("about to delete");
+  // });
 
   //stop propagation
   // $('.course').on('click', function(){
   //   $(this).find('.detail').slideToggle();
   // });
 
-  // $('.course .delete').on('click', function(event){
-  //   alert("about to delete");
-  // event.stopPropagation();
+  $('.course .delete').on('click', function(event){
+    alert("about to delete");
+  event.stopPropagation();
 
-  // });
+  });
 });
